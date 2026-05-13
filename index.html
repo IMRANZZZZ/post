@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Webly — Websites Beautifully Made</title>
+<title>Webly Studios</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -40,47 +40,170 @@ body{
   color:var(--text);
   font-family:'Jost',sans-serif;
   overflow-x:hidden;
+  position:relative;
+}
+/* LUXURY GRID BACKGROUND */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+
+  background-size:60px 60px;
+
+  mask-image:radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image:radial-gradient(circle at center, black 40%, transparent 100%);
+
+  z-index:-2;
+}
+
+/* GLOW ACCENTS */
+
+body::after{
+  content:"";
+  position:fixed;
+  width:700px;
+  height:700px;
+  background:radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+  top:-200px;
+  right:-200px;
+  z-index:-3;
+  pointer-events:none;
+}
+section{
+  padding:120px 7%;
+  position:relative;
+}
+
+section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.01),
+    transparent
+  );
+  pointer-events:none;
 }
 
 /* NAVBAR */
+/* MOBILE MENU */
+
+.menu-toggle{
+  display:none;
+  font-size:2rem;
+  color:white;
+  cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.nav-links{
+  position:absolute;
+  top:80px;
+  left:0;
+  width:100%;
+  background:#020617;
+  flex-direction:column;
+  align-items:center;
+  gap:25px;
+  padding:30px 0;
+  display:none;
+  border-bottom:1px solid rgba(139,92,246,.2);
+}
+
+.nav-links.active{
+  display:flex;
+}
+
+.menu-toggle{
+  display:block;
+}
+
+.btn-nav{
+  display:none;
+}
+
+}
+
+  /* NAVBAR */
 
 nav{
   position:fixed;
   top:0;
   left:0;
-  right:0;
-  height:80px;
   width:100%;
+  height:80px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 5%;
+
   background:rgba(2,6,23,0.92);
   backdrop-filter:blur(16px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 3%;
+
+  border-bottom:1px solid rgba(139,92,246,.15);
+
   z-index:999;
-  border-bottom:1px solid rgba(139,92,246,.2);
 }
 
-/* TEXT LOGO STYLING */
-.logo-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: white;
-  text-decoration: none;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  display: block;
+/* LOGO */
+
+.logo{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
 }
 
-nav.scrolled .logo-text {
-  transform: scale(0.9);
-  opacity: 0.9;
+.logo-text{
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.65rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  color:white;
+  text-decoration:none;
+  position:relative;
+  transition:.35s ease;
+  line-height:1;
+  white-space:nowrap;
 }
+
+.logo-text::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-7px;
+  width:35%;
+  height:1px;
+
+  background:linear-gradient(to right,#7c3aed,#60a5fa);
+
+  transition:.35s ease;
+}
+
+.logo-text:hover{
+  letter-spacing:.18em;
+}
+
+.logo-text:hover::after{
+  width:100%;
+}
+
+/* NAV LINKS */
 
 .nav-links{
   display:flex;
-  gap:35px;
+  align-items:center;
+  gap:32px;
   list-style:none;
 }
 
@@ -97,20 +220,50 @@ nav.scrolled .logo-text {
   color:var(--gold-light);
 }
 
+/* BUTTON */
+
 .btn-nav{
   text-decoration:none;
   color:white;
+
   background:linear-gradient(135deg,#7c3aed,#2563eb);
-  padding:12px 26px;
+
+  padding:12px 24px;
+
   font-size:.72rem;
   letter-spacing:.15em;
   text-transform:uppercase;
-  transition:.3s;
+
   border-radius:4px;
+
+  transition:.3s;
 }
 
 .btn-nav:hover{
   background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+nav{
+  height:72px;
+  padding:0 6%;
+}
+
+.logo-text{
+  font-size:1.3rem;
+}
+
+.nav-links{
+  display:none;
+}
+
+.btn-nav{
+  display:none;
+}
+
 }
 
 /* HERO */
@@ -562,15 +715,19 @@ nav{
 
 <nav>
 <div class="logo">
-  <a href="#" class="logo-text">Webly Studios</a>
+  <a href="#" class="logo-text">Webly</a>
 </div>
 
-<ul class="nav-links">
+<ul class="nav-links" id="navLinks">
 <li><a href="#packages">Packages</a></li>
 <li><a href="#process">Process</a></li>
 <li><a href="#why">About</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
+
+<div class="menu-toggle" id="menuToggle">
+  ☰
+</div>
 
 <a href="https://t.me/ranirooo" target="_blank" class="btn-nav">
 Telegram
@@ -674,15 +831,15 @@ Telegram
 <h2 class="section-title reveal">Crafted with <em>precision</em>.</h2>
 <p class="section-sub reveal">Beautiful websites designed to help brands grow online.</p>
 <div class="why-feat reveal">
-<h4>⚡ Fast</h4>
+<h4> Fast</h4>
 <p>Optimized for speed and performance.</p>
 </div>
 <div class="why-feat reveal">
-<h4>📱 Responsive</h4>
+<h4> Responsive</h4>
 <p>Perfect on mobile, tablet, and desktop.</p>
 </div>
 <div class="why-feat reveal">
-<h4>🔒 Secure</h4>
+<h4> Secure</h4>
 <p>Modern secure development standards.</p>
 </div>
 </div>
@@ -727,6 +884,12 @@ entry.target.classList.add("active");
 },{ threshold:0.15 });
 
 reveals.forEach(el => observer.observe(el));
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
 </script>
 
 </body>
